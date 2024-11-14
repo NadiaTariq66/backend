@@ -1,26 +1,26 @@
 const Joi = require("joi");
-const userDTO = require("../dto/userDto");
+const userDTO = require("../dto/userDto").default;
 const User = require("../models/user/user");
 
 const userController = {
   async userRegister(req, res, next) {
     try {
-      const signUpRegisteration = Joi.object({
+      const userSchema = Joi.object({
         userName: Joi.string().required(),
         email: Joi.string().required(),
       });
-      const { error } = signUpRegisteration.validate(req.body);
+      const { error } = userSchema.validate(req.body);
       if (error) {
         return next(error);
       }
       const { userName, email } = req.body;
       let user;
-      const userId = req.user._id;
+      // const userId= req.user._id;
       try {
         const userSignUp = new User({
-          userId,
+          // userId,
           userName,
-          email,
+          email
         });
 
         user = userSignUp.save();
