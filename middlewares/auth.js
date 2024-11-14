@@ -1,5 +1,7 @@
 const JWTService = require("../services/JWTService");
 const AccessToken = require("../models/accessToken");
+const User = require("../models/user/user")
+const userDTO = require("../dto/userDto");
 // const verifyAccessToken = require("../models/accessToken");
 
 const auth = async()=>{
@@ -27,6 +29,20 @@ if (!accessToken){
 }
 let _id;
  _id = JWTService.verifyAccessToken(accessToken)._id;
+ let user;
+    if (req.originalUrl.includes("/user")) {
+      try {
+        user = await User.findOne({ _id: _id });
+      } catch (error) {
+        return next(error);
+      }
+      const UserDto = new userDTO(user);
+
+      req.user = UserDto;
+
+      next();
+      return;
+    }
 
     }catch(error){
        return next(error);

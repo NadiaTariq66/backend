@@ -4,6 +4,7 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const errorHandler=require("./middlewares/errorHandler");
+const userRouter = require("./routes/user/user");
 
 const app = express();
 
@@ -21,7 +22,8 @@ app.get("/", (req, res) => {
 });
 // Add the errorHandler middleware as the last middleware
 app.use(errorHandler);
-const port = process.env.PORT || 3000;
+app.use(userRouter);
+const port = process.env.PORT;
 app.listen(port, () => {
     console.log(`server is running on port ${process.env.PORT}`);
 });
