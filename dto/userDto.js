@@ -1,8 +1,12 @@
-class userDTO {
+class UserDTO {
   constructor(user) {
-
-    this.userName = user.userName;
+    this._id = user._id;
+    this.name = user.name;
     this.email = user.email;
+    this.mrNo = user.mrNo;
+    this.phone = user.phone;
+    this.password = user.password;
   }
 }
-export default userDTO;
+
+module.exports = UserDTO;

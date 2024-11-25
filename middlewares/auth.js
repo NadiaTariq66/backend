@@ -1,7 +1,7 @@
 const JWTService = require("../services/JWTService");
 const AccessToken = require("../models/accessToken");
-const User = require("../models/user/user")
-const userDTO = require("../dto/userDto");
+const User = require("../models/user/user");
+const UserDTO = require("../dto/userDto");
 // const verifyAccessToken = require("../models/accessToken");
 
 const auth = async()=>{
@@ -36,7 +36,7 @@ let _id;
       } catch (error) {
         return next(error);
       }
-      const UserDto = new userDTO(user);
+      const UserDto = new UserDTO(user);
 
       req.user = UserDto;
 
